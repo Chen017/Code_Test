@@ -4,14 +4,18 @@ typedef unsigned char boolean;
 extern boolean isEven(int value);
 extern boolean isOdd(int value);
 extern int max(int a, int b);
+extern int maximum(const int * values, int size);
 
 extern boolean not(boolean a);
 extern boolean and(boolean a, boolean b);
 extern boolean or(boolean a, boolean b);
 extern boolean xor(boolean a, boolean b);
+extern boolean all(const boolean * values, int size);
 
 extern int write(const char * string, int length);
 extern int strLength(const char * string);
+extern int length(const char * string);
+extern char char_at(const char * string, int index);
 extern int indexOf(const char * string, char symbol);
 extern int lastIndexOf(const char * string, char symbol);
 extern char * toUppercase(const char * string);
@@ -28,6 +32,7 @@ void fullAdderTable(void);
 
 boolean evenOddCheck(void);
 boolean booleanFunctionsCheck(void);
+void extraTaskChecks(void);
 
 boolean fullAdder(boolean a, boolean b, boolean carry, boolean * carryOut);
 void printFullAdderResults_line(boolean a, boolean b, boolean carryIn, boolean carryOut, boolean res);
@@ -75,6 +80,8 @@ void main(void) {
         write(max_2_1_incorrect, strLength(max_2_1_incorrect));
     }
 
+    write("\n", 1);
+    extraTaskChecks();
 }
 
 void andTruthTable(void) {
@@ -156,6 +163,10 @@ void notTruthTable(void) {
 boolean evenOddCheck(void) {
     #define EVEN_VALUE 42
     #define ODD_VALUE 47
+    const char * isEven42Label = "isEven(42): ";
+    const char * isEven47Label = "isEven(47): ";
+    const char * isOdd42Label = "isOdd(42): ";
+    const char * isOdd47Label = "isOdd(47): ";
 
     char evenIsEvenChar = digitToChar(isEven(EVEN_VALUE));
     char evenIsOddChar = digitToChar(isOdd(EVEN_VALUE));
@@ -163,19 +174,19 @@ boolean evenOddCheck(void) {
     char oddIsOddChar = digitToChar(isOdd(ODD_VALUE));
     
 
-    write("isEven(42): ", 12);
+    write(isEven42Label, strLength(isEven42Label));
     write(&evenIsEvenChar, 1);
     write("\n", 1);
 
-    write("isEven(47): ", 12);
-    write(&evenIsOddChar, 1);
-    write("\n", 1);
-
-    write("isOdd(42): ", 12);
+    write(isEven47Label, strLength(isEven47Label));
     write(&oddIsEvenChar, 1);
     write("\n", 1);
 
-    write("isOdd(47): ", 12);
+    write(isOdd42Label, strLength(isOdd42Label));
+    write(&evenIsOddChar, 1);
+    write("\n", 1);
+
+    write(isOdd47Label, strLength(isOdd47Label));
     write(&oddIsOddChar, 1);
     write("\n", 1);
     
@@ -216,6 +227,72 @@ boolean booleanFunctionsCheck(void) {
     boolean andNeutralCorrect = and(andNeutral, andNeutral_reverse);
     boolean andFalseCorrect = and(andFalse, andFalse_reverse);
     return and(deMorgan, and(andNeutralCorrect, andFalseCorrect));
+}
+
+void extraTaskChecks(void) {
+    const char * sample = "assembly";
+    const char * charAtLabel = "char_at(\"assembly\", 1): ";
+    const char * lengthLabel = "length(\"assembly\"): ";
+    const char * indexLabel = "indexOf(\"assembly\", 's'): ";
+    const char * lastIndexLabel = "lastIndexOf(\"assembly\", 's'): ";
+    const char * maximumLabel = "maximum({4,9,2,7,5}): ";
+    const char * allTrueLabel = "all({1,1,1}): ";
+    const char * allFalseLabel = "all({1,0,1}): ";
+    const char * upperLabel = "toUppercase(\"hello\"): ";
+    const char * lowerLabel = "toLowercase(\"WORLD\"): ";
+    char sampleSecond = char_at(sample, 1);
+    char sampleIndexOfS = digitToChar(indexOf(sample, 's'));
+    char sampleLastIndexOfS = digitToChar(lastIndexOf(sample, 's'));
+    char sampleLength = digitToChar(length(sample));
+
+    write(charAtLabel, strLength(charAtLabel));
+    write(&sampleSecond, 1);
+    write("\n", 1);
+
+    write(lengthLabel, strLength(lengthLabel));
+    write(&sampleLength, 1);
+    write("\n", 1);
+
+    write(indexLabel, strLength(indexLabel));
+    write(&sampleIndexOfS, 1);
+    write("\n", 1);
+
+    write(lastIndexLabel, strLength(lastIndexLabel));
+    write(&sampleLastIndexOfS, 1);
+    write("\n", 1);
+
+    int numbers[5] = {4, 9, 2, 7, 5};
+    char maximumValue = digitToChar(maximum(numbers, 5));
+    write(maximumLabel, strLength(maximumLabel));
+    write(&maximumValue, 1);
+    write("\n", 1);
+
+    boolean valuesAllTrue[3] = {1, 1, 1};
+    boolean valuesNotAllTrue[3] = {1, 0, 1};
+    char allTrueResult = digitToChar(all(valuesAllTrue, 3));
+    char allFalseResult = digitToChar(all(valuesNotAllTrue, 3));
+
+    write(allTrueLabel, strLength(allTrueLabel));
+    write(&allTrueResult, 1);
+    write("\n", 1);
+
+    write(allFalseLabel, strLength(allFalseLabel));
+    write(&allFalseResult, 1);
+    write("\n", 1);
+
+    char upperWord[] = "hello";
+    char lowerWord[] = "WORLD";
+
+    toUppercase(upperWord);
+    toLowercase(lowerWord);
+
+    write(upperLabel, strLength(upperLabel));
+    write(upperWord, strLength(upperWord));
+    write("\n", 1);
+
+    write(lowerLabel, strLength(lowerLabel));
+    write(lowerWord, strLength(lowerWord));
+    write("\n", 1);
 }
 
 void fullAdderTable(void) {
