@@ -211,3 +211,5 @@ digitToChar_invalid:
     mov $0, %eax
     leave
     ret
+
+.section .note.GNU-stack,"",@progbits

@@ -82,3 +82,5 @@ maximum_next:
 maximum_done:
     leave
     ret
+
+.section .note.GNU-stack,"",@progbits

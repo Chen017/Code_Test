@@ -163,6 +163,10 @@ void notTruthTable(void) {
 boolean evenOddCheck(void) {
     #define EVEN_VALUE 42
     #define ODD_VALUE 47
+    const char * isEven42Label = "isEven(42): ";
+    const char * isEven47Label = "isEven(47): ";
+    const char * isOdd42Label = "isOdd(42): ";
+    const char * isOdd47Label = "isOdd(47): ";
 
     char evenIsEvenChar = digitToChar(isEven(EVEN_VALUE));
     char evenIsOddChar = digitToChar(isOdd(EVEN_VALUE));
@@ -170,19 +174,19 @@ boolean evenOddCheck(void) {
     char oddIsOddChar = digitToChar(isOdd(ODD_VALUE));
     
 
-    write("isEven(42): ", 12);
+    write(isEven42Label, strLength(isEven42Label));
     write(&evenIsEvenChar, 1);
     write("\n", 1);
 
-    write("isEven(47): ", 12);
-    write(&evenIsOddChar, 1);
-    write("\n", 1);
-
-    write("isOdd(42): ", 12);
+    write(isEven47Label, strLength(isEven47Label));
     write(&oddIsEvenChar, 1);
     write("\n", 1);
 
-    write("isOdd(47): ", 12);
+    write(isOdd42Label, strLength(isOdd42Label));
+    write(&evenIsOddChar, 1);
+    write("\n", 1);
+
+    write(isOdd47Label, strLength(isOdd47Label));
     write(&oddIsOddChar, 1);
     write("\n", 1);
     
@@ -227,30 +231,39 @@ boolean booleanFunctionsCheck(void) {
 
 void extraTaskChecks(void) {
     const char * sample = "assembly";
+    const char * charAtLabel = "char_at(\"assembly\", 1): ";
+    const char * lengthLabel = "length(\"assembly\"): ";
+    const char * indexLabel = "indexOf(\"assembly\", 's'): ";
+    const char * lastIndexLabel = "lastIndexOf(\"assembly\", 's'): ";
+    const char * maximumLabel = "maximum({4,9,2,7,5}): ";
+    const char * allTrueLabel = "all({1,1,1}): ";
+    const char * allFalseLabel = "all({1,0,1}): ";
+    const char * upperLabel = "toUppercase(\"hello\"): ";
+    const char * lowerLabel = "toLowercase(\"WORLD\"): ";
     char sampleSecond = char_at(sample, 1);
     char sampleIndexOfS = digitToChar(indexOf(sample, 's'));
     char sampleLastIndexOfS = digitToChar(lastIndexOf(sample, 's'));
     char sampleLength = digitToChar(length(sample));
 
-    write("char_at(\"assembly\", 1): ", 24);
+    write(charAtLabel, strLength(charAtLabel));
     write(&sampleSecond, 1);
     write("\n", 1);
 
-    write("length(\"assembly\"): ", 20);
+    write(lengthLabel, strLength(lengthLabel));
     write(&sampleLength, 1);
     write("\n", 1);
 
-    write("indexOf(\"assembly\", 's'): ", 27);
+    write(indexLabel, strLength(indexLabel));
     write(&sampleIndexOfS, 1);
     write("\n", 1);
 
-    write("lastIndexOf(\"assembly\", 's'): ", 31);
+    write(lastIndexLabel, strLength(lastIndexLabel));
     write(&sampleLastIndexOfS, 1);
     write("\n", 1);
 
     int numbers[5] = {4, 9, 2, 7, 5};
     char maximumValue = digitToChar(maximum(numbers, 5));
-    write("maximum({4,9,2,7,5}): ", 24);
+    write(maximumLabel, strLength(maximumLabel));
     write(&maximumValue, 1);
     write("\n", 1);
 
@@ -259,11 +272,11 @@ void extraTaskChecks(void) {
     char allTrueResult = digitToChar(all(valuesAllTrue, 3));
     char allFalseResult = digitToChar(all(valuesNotAllTrue, 3));
 
-    write("all({1,1,1}): ", 15);
+    write(allTrueLabel, strLength(allTrueLabel));
     write(&allTrueResult, 1);
     write("\n", 1);
 
-    write("all({1,0,1}): ", 15);
+    write(allFalseLabel, strLength(allFalseLabel));
     write(&allFalseResult, 1);
     write("\n", 1);
 
@@ -273,11 +286,11 @@ void extraTaskChecks(void) {
     toUppercase(upperWord);
     toLowercase(lowerWord);
 
-    write("toUppercase(\"hello\"): ", 22);
+    write(upperLabel, strLength(upperLabel));
     write(upperWord, strLength(upperWord));
     write("\n", 1);
 
-    write("toLowercase(\"WORLD\"): ", 22);
+    write(lowerLabel, strLength(lowerLabel));
     write(lowerWord, strLength(lowerWord));
     write("\n", 1);
 }
