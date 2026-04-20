@@ -2,10 +2,12 @@
 .global and
 .global or
 .global xor
+.global all
 .type not, @function
 .type and, @function
 .type or, @function
 .type xor, @function
+.type all, @function
 
 .text
 
@@ -58,5 +60,31 @@ xor:
     mov %sil, %al   # move the second argument's value into the return register
     xor %dil, %al   # calculate xor of the first argument's value and the return register
                     # leaving the result on the second operand (the return register)
+    leave
+    ret
+
+# all function
+# takes a pointer to a boolean array and a size
+# returns TRUE iff all elements are non-zero
+all:
+    push %rbp
+    mov %rsp, %rbp
+    mov $0, %eax
+
+all_loop:
+    cmp %esi, %eax
+    jge all_true
+    cmpb $0, (%rdi,%rax,1)
+    je all_false
+    add $1, %eax
+    jmp all_loop
+
+all_true:
+    mov $1, %eax
+    leave
+    ret
+
+all_false:
+    mov $0, %eax
     leave
     ret

@@ -4,14 +4,18 @@ typedef unsigned char boolean;
 extern boolean isEven(int value);
 extern boolean isOdd(int value);
 extern int max(int a, int b);
+extern int maximum(const int * values, int size);
 
 extern boolean not(boolean a);
 extern boolean and(boolean a, boolean b);
 extern boolean or(boolean a, boolean b);
 extern boolean xor(boolean a, boolean b);
+extern boolean all(const boolean * values, int size);
 
 extern int write(const char * string, int length);
 extern int strLength(const char * string);
+extern int length(const char * string);
+extern char char_at(const char * string, int index);
 extern int indexOf(const char * string, char symbol);
 extern int lastIndexOf(const char * string, char symbol);
 extern char * toUppercase(const char * string);
@@ -28,6 +32,7 @@ void fullAdderTable(void);
 
 boolean evenOddCheck(void);
 boolean booleanFunctionsCheck(void);
+void extraTaskChecks(void);
 
 boolean fullAdder(boolean a, boolean b, boolean carry, boolean * carryOut);
 void printFullAdderResults_line(boolean a, boolean b, boolean carryIn, boolean carryOut, boolean res);
@@ -75,6 +80,8 @@ void main(void) {
         write(max_2_1_incorrect, strLength(max_2_1_incorrect));
     }
 
+    write("\n", 1);
+    extraTaskChecks();
 }
 
 void andTruthTable(void) {
@@ -216,6 +223,63 @@ boolean booleanFunctionsCheck(void) {
     boolean andNeutralCorrect = and(andNeutral, andNeutral_reverse);
     boolean andFalseCorrect = and(andFalse, andFalse_reverse);
     return and(deMorgan, and(andNeutralCorrect, andFalseCorrect));
+}
+
+void extraTaskChecks(void) {
+    const char * sample = "assembly";
+    char sampleSecond = char_at(sample, 1);
+    char sampleIndexOfS = digitToChar(indexOf(sample, 's'));
+    char sampleLastIndexOfS = digitToChar(lastIndexOf(sample, 's'));
+    char sampleLength = digitToChar(length(sample));
+
+    write("char_at(\"assembly\", 1): ", 24);
+    write(&sampleSecond, 1);
+    write("\n", 1);
+
+    write("length(\"assembly\"): ", 20);
+    write(&sampleLength, 1);
+    write("\n", 1);
+
+    write("indexOf(\"assembly\", 's'): ", 27);
+    write(&sampleIndexOfS, 1);
+    write("\n", 1);
+
+    write("lastIndexOf(\"assembly\", 's'): ", 31);
+    write(&sampleLastIndexOfS, 1);
+    write("\n", 1);
+
+    int numbers[5] = {4, 9, 2, 7, 5};
+    char maximumValue = digitToChar(maximum(numbers, 5));
+    write("maximum({4,9,2,7,5}): ", 24);
+    write(&maximumValue, 1);
+    write("\n", 1);
+
+    boolean valuesAllTrue[3] = {1, 1, 1};
+    boolean valuesNotAllTrue[3] = {1, 0, 1};
+    char allTrueResult = digitToChar(all(valuesAllTrue, 3));
+    char allFalseResult = digitToChar(all(valuesNotAllTrue, 3));
+
+    write("all({1,1,1}): ", 15);
+    write(&allTrueResult, 1);
+    write("\n", 1);
+
+    write("all({1,0,1}): ", 15);
+    write(&allFalseResult, 1);
+    write("\n", 1);
+
+    char upperWord[] = "hello";
+    char lowerWord[] = "WORLD";
+
+    toUppercase(upperWord);
+    toLowercase(lowerWord);
+
+    write("toUppercase(\"hello\"): ", 22);
+    write(upperWord, strLength(upperWord));
+    write("\n", 1);
+
+    write("toLowercase(\"WORLD\"): ", 22);
+    write(lowerWord, strLength(lowerWord));
+    write("\n", 1);
 }
 
 void fullAdderTable(void) {
